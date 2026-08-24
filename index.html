@@ -1,627 +1,1591 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <title>Caleb & Nimisha | Our Wedding Journey</title>
 
-  <title>Caleb & Nimisha | Our Wedding</title>
+  <!-- Custom Icons -->
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./assets/icon-512.png">
 
-  <!-- Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  >
+  <meta name="description"
+    content="The wedding journey of Caleb and Nimisha, beginning on June 20, 2026.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
 
-    /* =========================
-       GLOBAL
-    ========================= */
+    :root,
+    [data-theme="light"] {
+
+      --bg: #f8f3ee;
+      --surface: rgba(255,255,255,0.75);
+      --surface-strong: rgba(255,255,255,0.92);
+
+      --text: #2f221b;
+      --text-muted: #6e5a4d;
+
+      --primary: #9a6b67;
+      --primary-hover: #80504d;
+
+      --border: rgba(78,54,40,0.16);
+
+      --shadow-sm: 0 10px 30px rgba(78,54,40,0.08);
+      --shadow-lg: 0 30px 80px rgba(78,54,40,0.16);
+
+      --font-display: "Cormorant Garamond", serif;
+      --font-body: "Inter", sans-serif;
+    }
+
+
+    [data-theme="dark"] {
+
+      --bg: #191411;
+      --surface: rgba(41,33,28,0.82);
+      --surface-strong: rgba(35,27,23,0.95);
+
+      --text: #f5ede5;
+      --text-muted: #d1c0b0;
+
+      --primary: #e2bbb2;
+      --primary-hover: #f2cfc5;
+
+      --border: rgba(255,241,230,0.12);
+
+      --shadow-sm: 0 12px 30px rgba(0,0,0,0.25);
+      --shadow-lg: 0 40px 100px rgba(0,0,0,0.35);
+    }
+
 
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
+
 
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
-      font-family: "Montserrat", sans-serif;
-      background: #f7f5ef;
-      color: #2f3d33;
+
+      margin: 0;
+      min-height: 100vh;
+
+      font-family: var(--font-body);
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(214,178,180,0.16),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(122,138,112,0.12),
+          transparent 30%
+        ),
+        var(--bg);
+
       overflow-x: hidden;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
     }
 
+
+    button,
     a {
+      font: inherit;
+    }
+
+
+    button {
+      cursor: pointer;
+    }
+
+
+    a {
+      color: inherit;
       text-decoration: none;
     }
 
+
     /* =========================
-       INTRO SCREEN
+       CURTAIN ANIMATION
     ========================= */
 
-    .intro-screen {
+    .curtain-reveal {
+
       position: fixed;
       inset: 0;
-      background:
-        radial-gradient(
-          circle at center,
-          #faf9f4 0%,
-          #ece8dd 100%
-        );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 1s ease, visibility 1s ease;
-    }
 
-    .intro-content {
-      text-align: center;
-      animation: fadeUp 1.5s ease;
-      padding: 30px;
-    }
+      z-index: 200;
 
-    .intro-content h3 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 20px;
-      font-weight: 400;
-      letter-spacing: 4px;
-      margin-bottom: 20px;
-      color: #687667;
-    }
+      pointer-events: none;
 
-    .intro-names {
-      font-family: "Great Vibes", cursive;
-      font-size: clamp(65px, 10vw, 110px);
-      color: #455a49;
-      margin-bottom: 35px;
-    }
-
-    .enter-btn {
-      border: 1px solid #687667;
-      background: transparent;
-      color: #455a49;
-      padding: 14px 35px;
-      letter-spacing: 2px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      border-radius: 30px;
-    }
-
-    .enter-btn:hover {
-      background: #536957;
-      color: white;
-      transform: translateY(-3px);
-    }
-
-    .intro-screen.hidden {
       opacity: 0;
       visibility: hidden;
     }
 
-    /* =========================
-       HERO
-    ========================= */
 
-    .hero {
-      min-height: 100vh;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 20px;
-      overflow: hidden;
+    .curtain-reveal.active {
+
+      opacity: 1;
+      visibility: visible;
+    }
+
+
+    .curtain-panel {
+
+      position: absolute;
+
+      top: 0;
+      bottom: 0;
+
+      width: 50%;
 
       background:
+
         linear-gradient(
-          rgba(250, 249, 244, 0.82),
-          rgba(250, 249, 244, 0.92)
+          180deg,
+          rgba(150,18,54,0.98),
+          rgba(102,11,36,0.99)
+        ),
+
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.12) 0 10px,
+          rgba(255,255,255,0.02) 10px 22px
+        );
+
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.08),
+        0 12px 30px rgba(0,0,0,0.2);
+    }
+
+
+    .curtain-panel.left {
+      left: 0;
+    }
+
+
+    .curtain-panel.right {
+      right: 0;
+    }
+
+
+    .curtain-light {
+
+      position: absolute;
+      inset: 0;
+
+      background:
+
+        radial-gradient(
+          circle at center,
+          rgba(255,248,241,0.95),
+          rgba(255,248,241,0.4) 25%,
+          transparent 55%
+        );
+
+      opacity: 0;
+    }
+
+
+    .curtain-reveal.active .left {
+      animation: curtainLeft 2.2s ease forwards;
+    }
+
+
+    .curtain-reveal.active .right {
+      animation: curtainRight 2.2s ease forwards;
+    }
+
+
+    .curtain-reveal.active .curtain-light {
+      animation: curtainLight 1.5s ease forwards;
+    }
+
+
+    @keyframes curtainLeft {
+
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-104%);
+      }
+    }
+
+
+    @keyframes curtainRight {
+
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(104%);
+      }
+    }
+
+
+    @keyframes curtainLight {
+
+      0% {
+        opacity: 0;
+      }
+
+      40% {
+        opacity: 0.9;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+
+    /* =========================
+       FLORAL BACKGROUND
+    ========================= */
+
+    .floral-canvas {
+
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 1;
+
+      overflow: hidden;
+    }
+
+
+    .floral-canvas svg {
+
+      position: absolute;
+
+      opacity: 0.72;
+
+      filter:
+        drop-shadow(
+          0 12px 24px
+          rgba(83,58,49,0.08)
         );
     }
 
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 350px;
-      height: 350px;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.3;
-      z-index: 0;
+
+    .floral-top-left {
+
+      top: -1rem;
+      left: -1rem;
+
+      width: min(48vw, 19rem);
     }
 
-    .hero::before {
-      background: #8ba08c;
-      top: -100px;
-      left: -100px;
+
+    .floral-bottom-right {
+
+      right: -1rem;
+      bottom: 4rem;
+
+      width: min(48vw, 18rem);
+
+      transform: rotate(180deg);
     }
 
-    .hero::after {
-      background: #d7c8a7;
-      bottom: -100px;
-      right: -100px;
-    }
-
-    .floral {
-      position: absolute;
-      font-size: 160px;
-      opacity: 0.15;
-      z-index: 0;
-      animation: float 8s ease-in-out infinite;
-    }
-
-    .floral.top-left {
-      top: 20px;
-      left: 30px;
-    }
-
-    .floral.top-right {
-      top: 20px;
-      right: 30px;
-      animation-delay: 2s;
-    }
-
-    .floral.bottom-left {
-      bottom: 10px;
-      left: 30px;
-      animation-delay: 1s;
-    }
-
-    .floral.bottom-right {
-      bottom: 10px;
-      right: 30px;
-      animation-delay: 3s;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 850px;
-    }
-
-    .small-title {
-      font-size: 13px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: #718071;
-      margin-bottom: 30px;
-      animation: fadeUp 1.5s ease;
-    }
-
-    .hero-names {
-      font-family: "Great Vibes", cursive;
-      font-size: clamp(75px, 13vw, 150px);
-      line-height: 0.9;
-      color: #3e5242;
-      animation: fadeUp 1.8s ease;
-    }
-
-    .with {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 28px;
-      margin: 20px 0;
-      font-style: italic;
-      color: #777;
-    }
-
-    .wedding-message {
-      margin-top: 35px;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 22px;
-      line-height: 1.6;
-      color: #555;
-      animation: fadeUp 2.2s ease;
-    }
-
-    .scroll-down {
-      margin-top: 60px;
-      font-size: 12px;
-      letter-spacing: 3px;
-      color: #788477;
-      animation: bounce 2s infinite;
-    }
 
     /* =========================
-       SECTION
+       FALLING PETALS
     ========================= */
 
-    section {
-      padding: 100px 20px;
-      position: relative;
+    .petal-layer {
+
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 3;
+
+      overflow: hidden;
     }
 
-    .section-title {
-      text-align: center;
-      font-family: "Great Vibes", cursive;
-      font-size: clamp(50px, 8vw, 80px);
-      color: #455a49;
-      margin-bottom: 15px;
+
+    .petal {
+
+      position: absolute;
+
+      top: -12vh;
+
+      width: 18px;
+      height: 24px;
+
+      opacity: 0.7;
+
+      background:
+
+        radial-gradient(
+          circle at 30% 30%,
+          rgba(255,255,255,0.9),
+          rgba(231,194,196,0.95) 40%,
+          rgba(196,145,147,0.88)
+        );
+
+      border-radius:
+        60% 40% 70% 30% /
+        40% 40% 60% 60%;
+
+      animation:
+        fall linear infinite,
+        sway ease-in-out infinite alternate;
     }
 
-    .section-subtitle {
-      text-align: center;
-      font-size: 12px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: #7b857a;
-      margin-bottom: 50px;
+
+    @keyframes fall {
+
+      0% {
+        transform:
+          translate3d(0,-10vh,0)
+          rotate(0deg)
+          scale(0.9);
+      }
+
+      100% {
+        transform:
+          translate3d(
+            var(--drift-x),
+            115vh,
+            0
+          )
+          rotate(360deg)
+          scale(1.08);
+      }
     }
+
+
+    @keyframes sway {
+
+      from {
+        margin-left: -8px;
+      }
+
+      to {
+        margin-left: 8px;
+      }
+    }
+
 
     /* =========================
-       DETAILS
+       WELCOME OVERLAY
     ========================= */
 
-    .details-section {
-      background: #ffffff;
-    }
+    .overlay {
 
-    .details-container {
-      max-width: 1000px;
-      margin: auto;
+      position: fixed;
+      inset: 0;
+
+      z-index: 150;
 
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-    }
+      place-items: center;
 
-    .detail-card {
-      padding: 40px 25px;
-      text-align: center;
-      border: 1px solid #e5e4dd;
-      background: #fbfaf6;
-      transition: all 0.4s ease;
-    }
+      padding: 20px;
 
-    .detail-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    }
-
-    .detail-icon {
-      font-size: 35px;
-      margin-bottom: 20px;
-    }
-
-    .detail-card h3 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 28px;
-      margin-bottom: 12px;
-      color: #435648;
-    }
-
-    .detail-card p {
-      font-size: 14px;
-      line-height: 1.8;
-      color: #666;
-    }
-
-    /* =========================
-       JOURNEY TIMER
-    ========================= */
-
-    .journey-section {
       background:
+
         linear-gradient(
-          135deg,
-          #405744,
-          #667a68
+          180deg,
+          rgba(24,17,14,0.55),
+          rgba(24,17,14,0.78)
         );
 
-      color: white;
+      backdrop-filter: blur(12px);
+
+      transition:
+        opacity 0.5s ease,
+        visibility 0.5s ease;
+    }
+
+
+    .overlay.hidden {
+
+      opacity: 0;
+      visibility: hidden;
+
+      pointer-events: none;
+    }
+
+
+    .overlay-card {
+
+      width: min(100%, 450px);
+
+      padding: 45px 30px;
+
       text-align: center;
-    }
 
-    .journey-section .section-title {
-      color: #ffffff;
-    }
-
-    .journey-section .section-subtitle {
-      color: #d8e0d8;
-    }
-
-    .journey-message {
-      max-width: 650px;
-      margin: 0 auto 45px;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 22px;
-      line-height: 1.7;
-      color: #eef2ec;
-    }
-
-    .timer-container {
-      max-width: 900px;
-      margin: auto;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .time-box {
-      min-width: 120px;
-      padding: 25px 15px;
-      border: 1px solid rgba(255,255,255,0.35);
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(8px);
-    }
-
-    .time-number {
-      display: block;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 52px;
-      font-weight: 600;
-    }
-
-    .time-label {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.85;
-    }
-
-    /* =========================
-       LOCATION
-    ========================= */
-
-    .location-section {
-      background: #f8f7f2;
-      text-align: center;
-    }
-
-    .venue-card {
-      max-width: 700px;
-      margin: auto;
-      padding: 55px 30px;
-      background: white;
-      box-shadow: 0 15px 45px rgba(0,0,0,0.06);
-    }
-
-    .venue-icon {
-      font-size: 40px;
-      margin-bottom: 20px;
-    }
-
-    .venue-card h3 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 36px;
-      color: #435648;
-      margin-bottom: 20px;
-    }
-
-    .venue-card p {
-      font-size: 15px;
-      line-height: 1.9;
-      color: #666;
-    }
-
-    .premium-btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 32px;
-      background: #536957;
-      color: white;
-      font-size: 12px;
-      letter-spacing: 2px;
       border-radius: 30px;
-      transition: all 0.4s ease;
+
+      background: var(--surface-strong);
+
+      border: 1px solid var(--border);
+
+      box-shadow: var(--shadow-lg);
     }
 
-    .premium-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(67,86,72,0.25);
+
+    .overlay-emblem-image {
+
+      width: 120px;
+      height: 120px;
+
+      margin:
+        0 auto
+        25px;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+
+      border:
+        1px solid var(--border);
+
+      box-shadow:
+        var(--shadow-sm);
     }
+
+
+    .overlay-card h1 {
+
+      margin: 0 0 15px;
+
+      font-family: var(--font-display);
+
+      font-size:
+        clamp(3rem,8vw,5rem);
+
+      line-height: 1;
+
+      color: var(--text);
+    }
+
+
+    .overlay-card p {
+
+      color: var(--text-muted);
+
+      line-height: 1.7;
+
+      margin-bottom: 30px;
+    }
+
 
     /* =========================
-       RSVP
+       TOP BAR
     ========================= */
 
-    .rsvp-section {
-      text-align: center;
-      background: white;
+    .topbar {
+
+      position: sticky;
+      top: 0;
+
+      z-index: 50;
+
+      backdrop-filter: blur(18px);
+
+      background:
+        color-mix(
+          in srgb,
+          var(--bg) 72%,
+          transparent
+        );
+
+      border-bottom:
+        1px solid transparent;
+
+      transition:
+        0.3s ease;
     }
 
-    .rsvp-text {
-      max-width: 600px;
-      margin: 0 auto;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 22px;
-      line-height: 1.7;
-      color: #666;
+
+    .topbar.scrolled {
+      border-color: var(--border);
     }
+
+
+    .topbar-inner {
+
+      max-width: 1150px;
+
+      margin: auto;
+
+      padding:
+        12px 18px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+    }
+
+
+    .monogram-image {
+
+      width: 58px;
+      height: 58px;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+
+      border:
+        1px solid var(--border);
+
+      box-shadow:
+        var(--shadow-sm);
+    }
+
+
+    .brand-text {
+
+      display: flex;
+
+      flex-direction: column;
+    }
+
+
+    .brand-text strong {
+
+      font-family:
+        var(--font-display);
+
+      font-size: 1.5rem;
+
+      line-height: 1;
+    }
+
+
+    .brand-text span {
+
+      margin-top: 5px;
+
+      font-size: 0.7rem;
+
+      letter-spacing: 0.15em;
+
+      text-transform: uppercase;
+
+      color: var(--text-muted);
+    }
+
+
+    .top-actions {
+
+      display: flex;
+
+      gap: 10px;
+    }
+
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .icon-btn,
+    .pill-btn,
+    .primary-btn {
+
+      min-height: 44px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 999px;
+
+      background: var(--surface);
+
+      color: var(--text);
+
+      padding:
+        0 18px;
+
+      transition:
+        0.25s ease;
+    }
+
+
+    .icon-btn {
+
+      width: 44px;
+
+      padding: 0;
+
+      display: grid;
+
+      place-items: center;
+    }
+
+
+    .icon-btn:hover,
+    .pill-btn:hover {
+
+      transform:
+        translateY(-2px);
+
+      background:
+        var(--surface-strong);
+    }
+
+
+    .primary-btn {
+
+      background:
+        var(--primary);
+
+      color: white;
+
+      border-color:
+        transparent;
+
+      box-shadow:
+        var(--shadow-sm);
+    }
+
+
+    .primary-btn:hover {
+
+      background:
+        var(--primary-hover);
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    /* =========================
+       MAIN CONTENT
+    ========================= */
+
+    .site-main {
+
+      position: relative;
+
+      z-index: 2;
+    }
+
+
+    .hero {
+
+      min-height:
+        calc(100vh - 80px);
+
+      display: grid;
+
+      place-items: center;
+
+      padding:
+        50px 20px;
+    }
+
+
+    .hero-shell {
+
+      width:
+        min(100%, 760px);
+
+      padding:
+        clamp(35px,6vw,70px);
+
+      text-align: center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 30px;
+
+      background:
+        var(--surface);
+
+      box-shadow:
+        var(--shadow-lg);
+
+      backdrop-filter:
+        blur(12px);
+    }
+
+
+    .scripture-card {
+
+      margin-bottom: 30px;
+
+      padding: 20px;
+
+      border-radius: 20px;
+
+      background:
+        rgba(255,255,255,0.25);
+
+      border:
+        1px solid var(--border);
+    }
+
+
+    .scripture-label {
+
+      display: block;
+
+      margin-bottom: 8px;
+
+      color:
+        var(--primary);
+
+      font-size: 0.75rem;
+
+      letter-spacing: 0.18em;
+
+      text-transform: uppercase;
+    }
+
+
+    .scripture-card p {
+
+      margin: 0;
+
+      font-family:
+        var(--font-display);
+
+      font-size:
+        clamp(1.2rem,3vw,1.6rem);
+
+      line-height: 1.5;
+    }
+
+
+    .hero-circle {
+
+      width:
+        min(340px,82vw);
+
+      aspect-ratio: 1;
+
+      margin:
+        0 auto
+        25px;
+
+      border-radius: 50%;
+
+      display: grid;
+
+      place-items: center;
+
+      padding: 35px;
+
+      background:
+
+        radial-gradient(
+          circle at 35% 30%,
+          rgba(255,255,255,0.95),
+          rgba(255,240,244,0.85) 45%,
+          rgba(249,226,231,0.78)
+        );
+
+      border:
+        1px solid
+        rgba(191,36,68,0.2);
+
+      box-shadow:
+        0 18px 38px
+        rgba(110,20,38,0.12);
+
+      position: relative;
+    }
+
+
+    .hero-circle::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 15px;
+
+      border-radius: 50%;
+
+      border:
+        1px dashed
+        rgba(191,36,68,0.25);
+    }
+
+
+    .names-script {
+
+      margin: 0;
+
+      font-family:
+        "Great Vibes",
+        cursive;
+
+      font-size:
+        clamp(4rem,10vw,6.5rem);
+
+      line-height: 0.9;
+
+      color:
+        #8b3f4f;
+    }
+
+
+    .ampersand {
+
+      display: block;
+
+      margin: 12px 0;
+
+      font-size:
+        0.7em;
+
+      color:
+        var(--primary);
+    }
+
+
+    .hero-copy {
+
+      max-width: 550px;
+
+      margin:
+        0 auto
+        25px;
+
+      color:
+        var(--text-muted);
+
+      line-height: 1.8;
+    }
+
+
+    .actions {
+
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-bottom: 30px;
+    }
+
+
+    .meta-cluster {
+
+      display: grid;
+
+      gap: 12px;
+
+      max-width: 550px;
+
+      margin: auto;
+    }
+
+
+    .meta-row {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      color:
+        var(--text-muted);
+    }
+
+
+    .meta-row svg {
+
+      color:
+        var(--primary);
+
+      flex-shrink: 0;
+    }
+
+
+    /* =========================
+       TIMER
+    ========================= */
+
+    .countdown-wrap {
+
+      max-width: 600px;
+
+      margin:
+        45px auto 0;
+
+      padding:
+        28px;
+
+      border-radius: 25px;
+
+      background:
+        var(--surface-strong);
+
+      border:
+        1px solid var(--border);
+
+      box-shadow:
+        var(--shadow-sm);
+    }
+
+
+    .countdown-wrap h2 {
+
+      margin:
+        0 0 12px;
+
+      font-family:
+        var(--font-display);
+
+      font-size:
+        clamp(2rem,5vw,3rem);
+    }
+
+
+    .timer-message {
+
+      margin:
+        0 auto
+        25px;
+
+      color:
+        var(--text-muted);
+
+      line-height: 1.7;
+    }
+
+
+    .countdown-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap: 10px;
+    }
+
+
+    .count-box {
+
+      padding:
+        18px 8px;
+
+      border-radius: 15px;
+
+      background:
+        var(--surface);
+
+      border:
+        1px solid var(--border);
+
+      text-align: center;
+    }
+
+
+    .count-box strong {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      font-family:
+        var(--font-display);
+
+      font-size:
+        clamp(1.6rem,5vw,2.8rem);
+
+      line-height: 1;
+
+      color:
+        var(--primary);
+
+      font-variant-numeric:
+        tabular-nums;
+    }
+
+
+    .count-box span {
+
+      font-size: 0.65rem;
+
+      letter-spacing: 0.12em;
+
+      text-transform: uppercase;
+
+      color:
+        var(--text-muted);
+    }
+
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    .section {
+
+      padding:
+        clamp(60px,8vw,110px)
+        20px;
+    }
+
+
+    .section-shell {
+
+      max-width: 1150px;
+
+      margin: auto;
+    }
+
+
+    .section-head {
+
+      text-align: center;
+
+      margin-bottom: 45px;
+    }
+
+
+    .eyebrow {
+
+      color:
+        var(--primary);
+
+      font-size: 0.75rem;
+
+      letter-spacing: 0.2em;
+
+      text-transform: uppercase;
+    }
+
+
+    .section-title {
+
+      margin:
+        10px 0 0;
+
+      font-family:
+        var(--font-display);
+
+      font-size:
+        clamp(2.8rem,7vw,5rem);
+
+      line-height: 1;
+    }
+
+
+    .section-copy {
+
+      max-width: 650px;
+
+      margin:
+        15px auto 0;
+
+      color:
+        var(--text-muted);
+
+      line-height: 1.8;
+    }
+
+
+    .details-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap: 20px;
+    }
+
+
+    .detail-card,
+    .schedule-card,
+    .quote-card {
+
+      padding:
+        30px;
+
+      border-radius: 22px;
+
+      background:
+        var(--surface);
+
+      border:
+        1px solid var(--border);
+
+      box-shadow:
+        var(--shadow-sm);
+
+      transition:
+        0.3s ease;
+    }
+
+
+    .detail-card:hover {
+
+      transform:
+        translateY(-8px);
+    }
+
+
+    .detail-card h3 {
+
+      margin:
+        0 0 12px;
+
+      font-family:
+        var(--font-display);
+
+      font-size: 2rem;
+    }
+
+
+    .detail-card p {
+
+      margin: 0;
+
+      color:
+        var(--text-muted);
+
+      line-height: 1.8;
+    }
+
+
+    .schedule-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        1.1fr 0.9fr;
+
+      gap: 20px;
+    }
+
+
+    .timeline {
+
+      display: grid;
+
+      gap: 15px;
+
+      margin-top: 25px;
+    }
+
+
+    .timeline-item {
+
+      padding:
+        18px;
+
+      border-radius: 15px;
+
+      background:
+        var(--surface-strong);
+
+      border:
+        1px solid var(--border);
+    }
+
+
+    .timeline-item strong {
+
+      display: block;
+
+      margin-bottom: 5px;
+    }
+
+
+    .timeline-item span {
+
+      color:
+        var(--text-muted);
+    }
+
+
+    .quote-card {
+
+      display: grid;
+
+      place-items: center;
+
+      text-align: center;
+    }
+
+
+    .quote-card p {
+
+      margin: 0;
+
+      font-family:
+        var(--font-display);
+
+      font-size:
+        clamp(2rem,5vw,3.5rem);
+
+      line-height: 1.2;
+    }
+
+
+    .quote-card span {
+
+      margin-top: 20px;
+
+      color:
+        var(--text-muted);
+
+      letter-spacing: 0.15em;
+
+      text-transform: uppercase;
+
+      font-size: 0.7rem;
+    }
+
 
     /* =========================
        FOOTER
     ========================= */
 
-    footer {
-      background: #344638;
-      color: white;
-      text-align: center;
-      padding: 70px 20px;
-    }
+    .footer {
 
-    .footer-names {
-      font-family: "Great Vibes", cursive;
-      font-size: clamp(55px, 8vw, 85px);
-      margin-bottom: 20px;
-    }
-
-    footer p {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 19px;
-      color: #dce3db;
-      line-height: 1.7;
-    }
-
-    /* =========================
-       MUSIC BUTTON
-    ========================= */
-
-    .music-btn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-
-      width: 55px;
-      height: 55px;
-
-      border: none;
-      border-radius: 50%;
-
-      background: #536957;
-      color: white;
-
-      font-size: 22px;
-      cursor: pointer;
-
-      z-index: 1000;
-
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-
-      transition: 0.3s ease;
-    }
-
-    .music-btn:hover {
-      transform: scale(1.1);
-    }
-
-    .music-btn.playing {
-      animation: pulse 1.5s infinite;
-    }
-
-    /* =========================
-       RSVP POPUP
-    ========================= */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-
-      background: rgba(0,0,0,0.5);
-
-      display: none;
-      align-items: center;
-      justify-content: center;
-
-      padding: 20px;
-      z-index: 9998;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-content {
-      width: 100%;
-      max-width: 450px;
-
-      background: #fff;
-      padding: 45px 30px;
-
-      text-align: center;
       position: relative;
 
-      animation: modalIn 0.5s ease;
+      z-index: 2;
+
+      padding:
+        70px 20px
+        120px;
+
+      text-align: center;
     }
 
-    .close-modal {
-      position: absolute;
-      top: 12px;
-      right: 18px;
 
-      border: none;
-      background: none;
+    .footer strong {
 
-      font-size: 28px;
-      cursor: pointer;
-      color: #777;
+      display: block;
+
+      font-family:
+        var(--font-display);
+
+      font-size:
+        clamp(2rem,5vw,3rem);
     }
 
-    .modal-content h2 {
-      font-family: "Great Vibes", cursive;
-      font-size: 55px;
-      color: #455a49;
-      margin-bottom: 20px;
+
+    .footer p {
+
+      color:
+        var(--text-muted);
     }
 
-    .modal-content p {
-      color: #666;
-      line-height: 1.7;
-      margin-bottom: 25px;
-    }
 
     /* =========================
-       ANIMATIONS
+       MUSIC BAR
     ========================= */
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
+    .music-bar {
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      position: fixed;
+
+      left: 50%;
+
+      bottom: 20px;
+
+      transform:
+        translateX(-50%);
+
+      z-index: 80;
+
+      width:
+        min(
+          calc(100% - 30px),
+          450px
+        );
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      padding:
+        12px 15px;
+
+      border-radius: 999px;
+
+      background:
+        var(--surface-strong);
+
+      border:
+        1px solid var(--border);
+
+      box-shadow:
+        var(--shadow-lg);
+
+      backdrop-filter:
+        blur(15px);
     }
 
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-      }
 
-      50% {
-        transform: translateY(-20px) rotate(5deg);
-      }
+    .music-meta {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      min-width: 0;
     }
 
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
 
-      50% {
-        transform: translateY(10px);
-      }
+    .music-dot {
+
+      width: 12px;
+      height: 12px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background:
+        var(--primary);
+
+      animation:
+        pulse 1.8s infinite;
     }
+
+
+    .music-text {
+
+      min-width: 0;
+    }
+
+
+    .music-text strong {
+
+      display: block;
+
+      font-size: 0.9rem;
+    }
+
+
+    .music-text span {
+
+      display: block;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+
+      max-width: 200px;
+
+      font-size: 0.7rem;
+
+      color:
+        var(--text-muted);
+    }
+
 
     @keyframes pulse {
+
       0% {
-        box-shadow: 0 0 0 0 rgba(83,105,87,0.6);
+        box-shadow:
+          0 0 0 0
+          rgba(154,107,103,0.45);
       }
 
       70% {
-        box-shadow: 0 0 0 15px rgba(83,105,87,0);
+        box-shadow:
+          0 0 0 12px
+          rgba(154,107,103,0);
       }
 
       100% {
-        box-shadow: 0 0 0 0 rgba(83,105,87,0);
+        box-shadow:
+          0 0 0 0
+          rgba(154,107,103,0);
       }
     }
 
-    @keyframes modalIn {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
-      }
 
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    /* =========================
+       MODALS
+    ========================= */
+
+    .modal {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 100;
+
+      display: grid;
+
+      place-items: end center;
+
+      padding: 20px;
+
+      background:
+        rgba(22,17,14,0.55);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      pointer-events: none;
+
+      transition:
+        0.25s ease;
     }
+
+
+    .modal.open {
+
+      opacity: 1;
+
+      visibility: visible;
+
+      pointer-events: auto;
+    }
+
+
+    .modal-sheet {
+
+      width:
+        min(100%,520px);
+
+      padding:
+        30px;
+
+      border-radius:
+        25px 25px 0 0;
+
+      background:
+        var(--bg);
+
+      border:
+        1px solid var(--border);
+
+      box-shadow:
+        var(--shadow-lg);
+
+      transform:
+        translateY(30px);
+
+      transition:
+        0.3s ease;
+    }
+
+
+    .modal.open .modal-sheet {
+
+      transform:
+        translateY(0);
+    }
+
+
+    .modal-top {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-bottom: 20px;
+    }
+
+
+    .modal-top h2 {
+
+      margin: 0;
+
+      font-family:
+        var(--font-display);
+
+      font-size: 2.5rem;
+    }
+
+
+    .modal-sheet p {
+
+      color:
+        var(--text-muted);
+
+      line-height: 1.8;
+    }
+
+
+    /* =========================
+       SCROLL ANIMATION
+    ========================= */
+
+    .fade-up {
+
+      opacity: 0;
+
+      transform:
+        translateY(20px);
+
+      transition:
+        0.7s ease;
+    }
+
+
+    .fade-up.visible {
+
+      opacity: 1;
+
+      transform:
+        translateY(0);
+    }
+
 
     /* =========================
        RESPONSIVE
@@ -629,54 +1593,178 @@
 
     @media (max-width: 800px) {
 
-      .details-container {
+      .details-grid,
+      .schedule-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        min-height: 100svh;
+      .brand-text span {
+        display: none;
       }
 
-      section {
-        padding: 75px 20px;
+      .countdown-grid {
+        grid-template-columns:
+          repeat(2,1fr);
       }
 
-      .time-box {
-        min-width: 100px;
+      .floral-top-left {
+        width: 45vw;
       }
 
-      .time-number {
-        font-size: 42px;
+      .floral-bottom-right {
+        width: 45vw;
       }
-
-      .floral {
-        font-size: 100px;
-      }
-
     }
 
   </style>
 </head>
 
+
 <body>
 
 
-  <!-- =========================
-       INTRO SCREEN
-  ========================= -->
+  <!-- CURTAIN -->
 
-  <div class="intro-screen" id="introScreen">
+  <div
+    class="curtain-reveal"
+    id="curtainReveal"
+  >
 
-    <div class="intro-content">
+    <div class="curtain-panel left"></div>
 
-      <h3>WELCOME TO OUR STORY</h3>
+    <div class="curtain-panel right"></div>
 
-      <div class="intro-names">
+    <div class="curtain-light"></div>
+
+  </div>
+
+
+  <!-- FLORAL DECORATION -->
+
+  <div
+    class="floral-canvas"
+    aria-hidden="true"
+  >
+
+    <svg
+      class="floral-top-left"
+      viewBox="0 0 220 220"
+      fill="none"
+    >
+
+      <path
+        d="M95 106C63 79 50 44 57 18C82 34 102 59 110 93"
+        stroke="rgba(122,138,112,0.58)"
+        stroke-width="2.2"
+      />
+
+      <path
+        d="M110 93C128 60 159 38 194 34C186 69 155 97 121 104"
+        stroke="rgba(122,138,112,0.5)"
+        stroke-width="2.2"
+      />
+
+      <path
+        d="M110 94C94 126 94 163 108 205"
+        stroke="rgba(122,138,112,0.48)"
+        stroke-width="2.2"
+      />
+
+      <g fill="rgba(214,178,180,0.55)">
+
+        <path d="M113 96C91 92 76 73 73 51C94 55 110 72 113 96Z"/>
+
+        <path d="M111 94C131 85 154 90 171 107C152 117 127 112 111 94Z"/>
+
+        <path d="M110 96C123 115 122 140 109 160C95 141 96 116 110 96Z"/>
+
+      </g>
+
+      <circle
+        cx="111"
+        cy="96"
+        r="7"
+        fill="rgba(156,110,108,0.72)"
+      />
+
+    </svg>
+
+
+    <svg
+      class="floral-bottom-right"
+      viewBox="0 0 220 220"
+      fill="none"
+    >
+
+      <path
+        d="M95 106C63 79 50 44 57 18C82 34 102 59 110 93"
+        stroke="rgba(122,138,112,0.58)"
+        stroke-width="2.2"
+      />
+
+      <path
+        d="M110 93C128 60 159 38 194 34C186 69 155 97 121 104"
+        stroke="rgba(122,138,112,0.5)"
+        stroke-width="2.2"
+      />
+
+      <g fill="rgba(234,205,207,0.42)">
+
+        <path d="M113 96C91 92 76 73 73 51C94 55 110 72 113 96Z"/>
+
+        <path d="M111 94C131 85 154 90 171 107C152 117 127 112 111 94Z"/>
+
+      </g>
+
+    </svg>
+
+  </div>
+
+
+  <!-- PETALS -->
+
+  <div
+    class="petal-layer"
+    id="petalLayer"
+  ></div>
+
+
+  <!-- WELCOME SCREEN -->
+
+  <div
+    class="overlay"
+    id="welcomeOverlay"
+  >
+
+    <div class="overlay-card">
+
+      <!-- YOUR CUSTOM ICON -->
+
+      <img
+        class="overlay-emblem-image"
+        src="./assets/site-icon.jpg"
+        alt="Caleb and Nimisha wedding emblem"
+      >
+
+
+      <h1>
         Caleb & Nimisha
-      </div>
+      </h1>
 
-      <button class="enter-btn" onclick="enterWebsite()">
-        ENTER OUR STORY
+
+      <p>
+        With joy in our hearts,
+        we invite you to celebrate
+        our love and the beginning
+        of our beautiful journey.
+      </p>
+
+
+      <button
+        class="primary-btn"
+        id="openInviteBtn"
+      >
+        Open Invitation
       </button>
 
     </div>
@@ -684,337 +1772,678 @@
   </div>
 
 
-  <!-- =========================
-       HERO
-  ========================= -->
+  <!-- HEADER -->
 
-  <section class="hero">
+  <header
+    class="topbar"
+    id="topbar"
+  >
 
-    <div class="floral top-left">🌿</div>
-    <div class="floral top-right">🤍</div>
-    <div class="floral bottom-left">🌿</div>
-    <div class="floral bottom-right">🌿</div>
+    <div class="topbar-inner">
 
-    <div class="hero-content">
+      <div class="brand">
 
-      <div class="small-title">
-        WE SAID YES TO FOREVER
+        <!-- CUSTOM ICON -->
+
+        <img
+          class="monogram-image"
+          src="./assets/site-icon.jpg"
+          alt="Caleb and Nimisha wedding icon"
+        >
+
+
+        <div class="brand-text">
+
+          <strong>
+            C & N
+          </strong>
+
+          <span>
+            Our Journey
+          </span>
+
+        </div>
+
       </div>
 
-      <div class="hero-names">
-        Caleb
-      </div>
 
-      <div class="with">
-        with
-      </div>
+      <div class="top-actions">
 
-      <div class="hero-names">
-        Nimisha
-      </div>
+        <button
+          class="icon-btn"
+          id="themeToggle"
+          aria-label="Switch theme"
+        >
+          🌙
+        </button>
 
-      <p class="wedding-message">
-        Two hearts, one beautiful journey,
-        and a lifetime of love ahead.
-      </p>
 
-      <div class="scroll-down">
-        ↓ SCROLL TO EXPLORE ↓
+        <button
+          class="pill-btn"
+          data-open-modal="details"
+        >
+          Details
+        </button>
+
       </div>
 
     </div>
 
-  </section>
+  </header>
 
 
-  <!-- =========================
-       WEDDING DETAILS
-  ========================= -->
+  <!-- MAIN -->
 
-  <section class="details-section">
+  <main
+    id="content"
+    class="site-main"
+  >
 
-    <h2 class="section-title">
-      Our Special Day
-    </h2>
 
-    <p class="section-subtitle">
-      A DAY WE WILL ALWAYS REMEMBER
-    </p>
+    <!-- HERO -->
 
-    <div class="details-container">
+    <section class="hero">
 
-      <div class="detail-card">
+      <div class="hero-shell fade-up">
 
-        <div class="detail-icon">📅</div>
 
-        <h3>June 20</h3>
+        <div class="scripture-card">
 
-        <p>
-          Saturday<br>
-          2026
+          <span class="scripture-label">
+            Genesis 2:18
+          </span>
+
+          <p>
+            The LORD God said,
+            "It is not good for the man
+            to be alone. I will make
+            a helper suitable for him."
+          </p>
+
+        </div>
+
+
+        <div class="hero-circle">
+
+          <p class="names-script">
+
+            Caleb
+
+            <span class="ampersand">
+              &
+            </span>
+
+            Nimisha
+
+          </p>
+
+        </div>
+
+
+        <p class="hero-copy">
+          A beautiful journey of faith,
+          love and togetherness —
+          beginning on June 20, 2026
+          and continuing forever.
         </p>
 
+
+        <div class="actions">
+
+          <a
+            class="primary-btn"
+            href="https://maps.app.goo.gl/YfYq7dqatdvL5kZ69"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Map
+          </a>
+
+
+          <button
+            class="pill-btn"
+            data-open-modal="schedule"
+          >
+            View Schedule
+          </button>
+
+        </div>
+
+
+        <div class="meta-cluster">
+
+          <div class="meta-row">
+
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <rect
+                x="3"
+                y="4"
+                width="18"
+                height="18"
+                rx="2"
+              />
+
+              <path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+
+            <span>
+              Saturday, June 20, 2026
+            </span>
+
+          </div>
+
+
+          <div class="meta-row">
+
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+
+              <circle
+                cx="12"
+                cy="12"
+                r="9"
+              />
+
+              <path d="M12 7v5l3 3"/>
+
+            </svg>
+
+            <span>
+              10:30 AM onwards
+            </span>
+
+          </div>
+
+
+          <div class="meta-row">
+
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+
+              <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"/>
+
+              <circle
+                cx="12"
+                cy="11"
+                r="2.3"
+              />
+
+            </svg>
+
+            <span>
+              Pandit Karuppan Memorial Hall, Edakochi
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- TIMER -->
+
+        <aside
+          class="countdown-wrap"
+        >
+
+          <h2 id="timerTitle">
+            Counting Down
+          </h2>
+
+
+          <p
+            class="timer-message"
+            id="timerMessage"
+          >
+            Every second brings us closer
+            to the beginning of our forever.
+          </p>
+
+
+          <div
+            class="countdown-grid"
+            id="countdown"
+          >
+
+            <div class="count-box">
+
+              <strong
+                data-unit="days"
+              >
+                0
+              </strong>
+
+              <span id="daysLabel">
+                Days
+              </span>
+
+            </div>
+
+
+            <div class="count-box">
+
+              <strong
+                data-unit="hours"
+              >
+                0
+              </strong>
+
+              <span>
+                Hours
+              </span>
+
+            </div>
+
+
+            <div class="count-box">
+
+              <strong
+                data-unit="minutes"
+              >
+                0
+              </strong>
+
+              <span>
+                Minutes
+              </span>
+
+            </div>
+
+
+            <div class="count-box">
+
+              <strong
+                data-unit="seconds"
+              >
+                0
+              </strong>
+
+              <span>
+                Seconds
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <button
+            class="pill-btn"
+            style="margin-top:20px"
+            data-open-modal="blessing"
+          >
+            Send Blessings
+          </button>
+
+        </aside>
+
       </div>
 
-
-      <div class="detail-card">
-
-        <div class="detail-icon">🕊️</div>
-
-        <h3>10:30 AM</h3>
-
-        <p>
-          The moment<br>
-          our forever began
-        </p>
-
-      </div>
+    </section>
 
 
-      <div class="detail-card">
+    <!-- DETAILS -->
 
-        <div class="detail-icon">💍</div>
+    <section class="section">
 
-        <h3>Forever</h3>
-
-        <p>
-          And thereafter,<br>
-          our journey continues
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
+      <div class="section-shell">
 
 
-  <!-- =========================
-       JOURNEY TIMER
-  ========================= -->
+        <div class="section-head fade-up">
 
-  <section class="journey-section">
+          <div class="eyebrow">
+            Our Special Day
+          </div>
 
-    <h2 class="section-title" id="timerTitle">
-      Counting Down
-    </h2>
+          <h2 class="section-title">
+            Celebration Details
+          </h2>
 
-    <p class="section-subtitle" id="timerSubtitle">
-      UNTIL OUR FOREVER BEGINS
-    </p>
+          <p class="section-copy">
+            A beautiful celebration of
+            faith, love and two hearts
+            becoming one.
+          </p>
 
-    <p class="journey-message" id="journeyMessage">
-      Every second brings us closer to the day
-      when our beautiful journey begins.
-    </p>
-
-
-    <div class="timer-container">
-
-      <div class="time-box" id="yearsBox">
-
-        <span class="time-number" id="years">
-          0
-        </span>
-
-        <span class="time-label">
-          Years
-        </span>
-
-      </div>
+        </div>
 
 
-      <div class="time-box">
-
-        <span class="time-number" id="days">
-          0
-        </span>
-
-        <span class="time-label">
-          Days
-        </span>
-
-      </div>
+        <div class="details-grid">
 
 
-      <div class="time-box">
+          <article class="detail-card fade-up">
 
-        <span class="time-number" id="hours">
-          0
-        </span>
+            <h3>
+              The Wedding
+            </h3>
 
-        <span class="time-label">
-          Hours
-        </span>
+            <p>
+              Saturday, June 20, 2026
+              at 10:30 AM.
+              We would be honoured
+              by your presence as we
+              celebrate this beautiful
+              beginning together.
+            </p>
+
+          </article>
+
+
+          <article class="detail-card fade-up">
+
+            <h3>
+              The Venue
+            </h3>
+
+            <p>
+              Pandit Karuppan Memorial Hall,
+              Edakochi.
+              Use the map button anytime
+              for directions.
+            </p>
+
+          </article>
+
+
+          <article class="detail-card fade-up">
+
+            <h3>
+              The Reception
+            </h3>
+
+            <p>
+              The celebration continues
+              after the ceremony at the
+              same venue.
+              Please stay and celebrate
+              with us.
+            </p>
+
+          </article>
+
+        </div>
 
       </div>
 
+    </section>
 
-      <div class="time-box">
 
-        <span class="time-number" id="minutes">
-          0
-        </span>
+    <!-- SCHEDULE -->
 
-        <span class="time-label">
-          Minutes
-        </span>
+    <section class="section">
+
+      <div class="section-shell schedule-grid">
+
+
+        <article class="schedule-card fade-up">
+
+          <div class="eyebrow">
+            Day Flow
+          </div>
+
+
+          <h2
+            class="section-title"
+            style="font-size:clamp(2.5rem,5vw,4rem)"
+          >
+            Our Celebration
+          </h2>
+
+
+          <div class="timeline">
+
+
+            <div class="timeline-item">
+
+              <strong>
+                10:30 AM — Wedding Ceremony
+              </strong>
+
+              <span>
+                Join us as we celebrate
+                the sacred beginning
+                of our married life.
+              </span>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+              <strong>
+                After the Ceremony — Reception
+              </strong>
+
+              <span>
+                Please stay and share
+                your blessings, laughter
+                and joy with us.
+              </span>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+              <strong>
+                One Beautiful Journey
+              </strong>
+
+              <span>
+                What began on June 20, 2026
+                continues as a lifetime
+                of memories.
+              </span>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <aside class="quote-card fade-up">
+
+          <div>
+
+            <p>
+              “What God has joined together,
+              let no one separate.”
+            </p>
+
+            <span>
+              Mark 10:9
+            </span>
+
+          </div>
+
+        </aside>
 
       </div>
 
+    </section>
 
-      <div class="time-box">
 
-        <span class="time-number" id="seconds">
-          0
-        </span>
+    <!-- JOURNEY SECTION -->
 
-        <span class="time-label">
-          Seconds
-        </span>
+    <section class="section">
+
+      <div class="section-shell">
+
+        <div class="quote-card fade-up">
+
+          <div>
+
+            <p>
+              Our wedding was not
+              the end of a story.
+              It was the beginning
+              of our forever.
+            </p>
+
+            <span>
+              Caleb & Nimisha ♡
+            </span>
+
+          </div>
+
+        </div>
 
       </div>
 
-    </div>
+    </section>
 
-  </section>
-
-
-  <!-- =========================
-       LOCATION
-  ========================= -->
-
-  <section class="location-section">
-
-    <h2 class="section-title">
-      The Celebration
-    </h2>
-
-    <p class="section-subtitle">
-      JOIN US AS WE CELEBRATE LOVE
-    </p>
+  </main>
 
 
-    <div class="venue-card">
+  <!-- FOOTER -->
 
-      <div class="venue-icon">
-        📍
-      </div>
+  <footer class="footer fade-up">
 
-      <h3>
-        Pandit Karuppan Memorial Hall
-      </h3>
-
-      <p>
-        Edakochi, Kerala
-      </p>
-
-      <p>
-        Saturday, June 20, 2026<br>
-        10:30 AM
-      </p>
-
-      <p>
-        Reception thereafter at the same venue
-      </p>
-
-
-      <a
-        class="premium-btn"
-        href="https://maps.app.goo.gl/YfYq7dqatdvL5kZ69"
-        target="_blank"
-      >
-        VIEW LOCATION
-      </a>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       RSVP
-  ========================= -->
-
-  <section class="rsvp-section">
-
-    <h2 class="section-title">
-      Celebrate With Us
-    </h2>
-
-    <p class="section-subtitle">
-      YOUR PRESENCE MEANS THE WORLD TO US
-    </p>
-
-    <p class="rsvp-text">
-      We would be delighted to have you
-      celebrate this beautiful beginning with us.
-    </p>
-
-
-    <button
-      class="premium-btn"
-      onclick="openRSVP()"
-    >
-      RSVP
-    </button>
-
-  </section>
-
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
-  <footer>
-
-    <div class="footer-names">
-      Caleb & Nimisha
-    </div>
+    <strong>
+      Our Journey Continues
+    </strong>
 
     <p>
-      What began on June 20, 2026,<br>
-      continues forever. ♡
-    </p>
-
-    <br>
-
-    <p style="font-size: 13px; opacity: 0.7;">
-      Thank you for being part of our story.
+      With love,<br>
+      Caleb & Nimisha ♡
     </p>
 
   </footer>
 
 
-  <!-- =========================
-       RSVP POPUP
-  ========================= -->
+  <!-- MUSIC PLAYER -->
+
+  <div
+    class="music-bar"
+    aria-label="Music controls"
+  >
+
+    <div class="music-meta">
+
+      <span
+        class="music-dot"
+      ></span>
+
+
+      <div class="music-text">
+
+        <strong>
+          Our Wedding Song
+        </strong>
+
+        <span id="musicStatus">
+          Tap play to enjoy our song
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="pill-btn"
+      type="button"
+      id="musicToggleBtn"
+    >
+      Play Music
+    </button>
+
+  </div>
+
+
+  <!-- IMPORTANT:
+       MUSIC FILE MUST BE HERE:
+       ./assets/beautiful-in-white.mp3
+  -->
+
+  <audio
+    id="weddingAudio"
+    loop
+    playsinline
+    preload="auto"
+  >
+
+    <source
+      src="./assets/beautiful-in-white.mp3"
+      type="audio/mpeg"
+    >
+
+  </audio>
+
+
+  <!-- DETAILS MODAL -->
 
   <div
     class="modal"
-    id="rsvpModal"
+    id="detailsModal"
   >
 
-    <div class="modal-content">
+    <div class="modal-sheet">
 
-      <button
-        class="close-modal"
-        onclick="closeRSVP()"
-      >
-        ×
-      </button>
+      <div class="modal-top">
 
-      <h2>
-        Thank You
-      </h2>
+        <h2>
+          Event Details
+        </h2>
+
+        <button
+          class="icon-btn"
+          data-close-modal
+        >
+          ✕
+        </button>
+
+      </div>
 
       <p>
-        Your love, blessings and presence
-        mean so much to us.
+        <strong>Bride:</strong>
+        Nimisha
       </p>
 
       <p>
-        Caleb & Nimisha ♡
+        <strong>Groom:</strong>
+        Caleb
+      </p>
+
+      <p>
+        <strong>Date:</strong>
+        June 20, 2026
+      </p>
+
+      <p>
+        <strong>Time:</strong>
+        10:30 AM
+      </p>
+
+      <p>
+        <strong>Venue:</strong>
+        Pandit Karuppan Memorial Hall,
+        Edakochi
+      </p>
+
+      <p>
+        <strong>Reception:</strong>
+        The celebration continues
+        at the same venue.
       </p>
 
     </div>
@@ -1022,417 +2451,885 @@
   </div>
 
 
-  <!-- =========================
-       MUSIC
-  ========================= -->
+  <!-- SCHEDULE MODAL -->
 
-  <!--
-    IMPORTANT:
-
-    Upload your MP3 file into the SAME GitHub folder
-    as index.html.
-
-    Change "wedding-music.mp3" below to your actual
-    MP3 filename if needed.
-  -->
-
-  <audio
-    id="bgMusic"
-    loop
+  <div
+    class="modal"
+    id="scheduleModal"
   >
-    <source
-      src="wedding-music.mp3"
-      type="audio/mpeg"
-    >
-  </audio>
+
+    <div class="modal-sheet">
+
+      <div class="modal-top">
+
+        <h2>
+          Celebration Schedule
+        </h2>
+
+        <button
+          class="icon-btn"
+          data-close-modal
+        >
+          ✕
+        </button>
+
+      </div>
 
 
-  <button
-    class="music-btn"
-    id="musicButton"
-    onclick="toggleMusic()"
-    title="Play Music"
+      <div class="timeline">
+
+        <div class="timeline-item">
+
+          <strong>
+            10:30 AM
+          </strong>
+
+          <span>
+            Wedding ceremony begins.
+          </span>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+          <strong>
+            Afterwards
+          </strong>
+
+          <span>
+            Reception at the same venue.
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- BLESSINGS MODAL -->
+
+  <div
+    class="modal"
+    id="blessingModal"
   >
-    🎵
-  </button>
+
+    <div class="modal-sheet">
+
+      <div class="modal-top">
+
+        <h2>
+          Blessings
+        </h2>
+
+        <button
+          class="icon-btn"
+          data-close-modal
+        >
+          ✕
+        </button>
+
+      </div>
 
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================= -->
+      <p>
+        Your presence, prayers
+        and blessings mean
+        the world to us.
+      </p>
+
+
+      <p>
+        With love,
+        <strong>
+          Caleb & Nimisha
+        </strong>
+      </p>
+
+    </div>
+
+  </div>
+
 
   <script>
 
-    /* =========================
-       INTRO SCREEN
-    ========================= */
-
-    function enterWebsite() {
-
-      document
-        .getElementById("introScreen")
-        .classList
-        .add("hidden");
-
-    }
+    (function () {
 
 
-    /* =========================
-       RSVP POPUP
-    ========================= */
+      /* =========================
+         THEME
+      ========================= */
 
-    function openRSVP() {
+      const root =
+        document.documentElement;
 
-      document
-        .getElementById("rsvpModal")
-        .classList
-        .add("show");
-
-    }
-
-
-    function closeRSVP() {
-
-      document
-        .getElementById("rsvpModal")
-        .classList
-        .remove("show");
-
-    }
+      const themeToggle =
+        document.getElementById(
+          "themeToggle"
+        );
 
 
-    /* Close popup when clicking outside */
+      themeToggle.addEventListener(
+        "click",
+        function () {
 
-    document
-      .getElementById("rsvpModal")
-      .addEventListener("click", function(event) {
+          const currentTheme =
+            root.getAttribute(
+              "data-theme"
+            );
 
-        if (event.target === this) {
-          closeRSVP();
+          const nextTheme =
+            currentTheme === "dark"
+              ? "light"
+              : "dark";
+
+          root.setAttribute(
+            "data-theme",
+            nextTheme
+          );
+
+          themeToggle.textContent =
+            nextTheme === "dark"
+              ? "☀️"
+              : "🌙";
+
         }
-
-      });
-
-
-    /* =========================
-       MUSIC
-    ========================= */
-
-    const music =
-      document.getElementById("bgMusic");
-
-    const musicButton =
-      document.getElementById("musicButton");
+      );
 
 
-    function toggleMusic() {
+      /* =========================
+         TOPBAR
+      ========================= */
 
-      if (music.paused) {
-
-        music.play();
-
-        musicButton.classList.add("playing");
-
-        musicButton.innerHTML = "🎶";
-
-      } else {
-
-        music.pause();
-
-        musicButton.classList.remove("playing");
-
-        musicButton.innerHTML = "🎵";
-
-      }
-
-    }
+      const topbar =
+        document.getElementById(
+          "topbar"
+        );
 
 
-    /* =========================
-       WEDDING / JOURNEY TIMER
-    ========================= */
+      window.addEventListener(
+        "scroll",
+        function () {
 
-    /*
-      Wedding starting point:
-
-      June 20, 2026
-      10:00 AM
-      India Standard Time
-    */
-
-    const weddingDate =
-      new Date("2026-06-20T10:00:00+05:30");
-
-
-    function updateWeddingTimer() {
-
-      const now = new Date();
-
-      const difference =
-        weddingDate - now;
-
-
-      /* ==================================
-         BEFORE THE WEDDING
-         COUNT DOWN
-      ================================== */
-
-      if (difference > 0) {
-
-        const totalSeconds =
-          Math.floor(difference / 1000);
-
-
-        const days =
-          Math.floor(
-            totalSeconds / 86400
+          topbar.classList.toggle(
+            "scrolled",
+            window.scrollY > 20
           );
 
-
-        const hours =
-          Math.floor(
-            (totalSeconds % 86400) / 3600
-          );
-
-
-        const minutes =
-          Math.floor(
-            (totalSeconds % 3600) / 60
-          );
+        },
+        {
+          passive: true
+        }
+      );
 
 
-        const seconds =
-          totalSeconds % 60;
+      /* =========================
+         JOURNEY TIMER
+      ========================= */
+
+      /*
+        Wedding journey begins:
+
+        June 20, 2026
+        10:00 AM
+        India Standard Time
+
+        Before this time:
+        Countdown to wedding
+
+        After this time:
+        Count upward showing how long
+        Caleb & Nimisha have been
+        on their journey together.
+      */
+
+      const weddingJourneyDate =
+        new Date(
+          "2026-06-20T10:00:00+05:30"
+        ).getTime();
 
 
-        document
-          .getElementById("timerTitle")
-          .innerHTML =
-          "Counting Down";
+      const timerTitle =
+        document.getElementById(
+          "timerTitle"
+        );
 
 
-        document
-          .getElementById("timerSubtitle")
-          .innerHTML =
-          "UNTIL OUR FOREVER BEGINS";
+      const timerMessage =
+        document.getElementById(
+          "timerMessage"
+        );
 
 
-        document
-          .getElementById("journeyMessage")
-          .innerHTML =
-          "Every second brings us closer to the day when our beautiful journey begins.";
+      const daysElement =
+        document.querySelector(
+          '[data-unit="days"]'
+        );
 
 
-        /*
-          Before the wedding,
-          Years stays at 0.
-        */
-
-        document
-          .getElementById("years")
-          .innerHTML =
-          "0";
+      const hoursElement =
+        document.querySelector(
+          '[data-unit="hours"]'
+        );
 
 
-        document
-          .getElementById("days")
-          .innerHTML =
-          String(days).padStart(2, "0");
+      const minutesElement =
+        document.querySelector(
+          '[data-unit="minutes"]'
+        );
 
 
-        document
-          .getElementById("hours")
-          .innerHTML =
-          String(hours).padStart(2, "0");
+      const secondsElement =
+        document.querySelector(
+          '[data-unit="seconds"]'
+        );
 
 
-        document
-          .getElementById("minutes")
-          .innerHTML =
-          String(minutes).padStart(2, "0");
+      function pad(number) {
 
-
-        document
-          .getElementById("seconds")
-          .innerHTML =
-          String(seconds).padStart(2, "0");
+        return String(number)
+          .padStart(2, "0");
 
       }
 
 
-      /* ==================================
-         AFTER THE WEDDING
-         COUNT UP
-      ================================== */
+      function updateJourneyTimer() {
 
-      else {
+        const now =
+          Date.now();
 
-        const elapsed =
-          now - weddingDate;
+        const difference =
+          weddingJourneyDate - now;
 
 
-        /*
-          Calculate full years
-          since the wedding date.
-        */
+        /* =========================
+           BEFORE WEDDING
+        ========================= */
 
-        let years =
-          now.getFullYear() -
-          weddingDate.getFullYear();
+        if (difference > 0) {
 
-
-        const anniversary =
-          new Date(weddingDate);
-
-        anniversary.setFullYear(
-          weddingDate.getFullYear() + years
-        );
-
-
-        /*
-          If the anniversary hasn't happened yet,
-          subtract one year.
-        */
-
-        if (anniversary > now) {
-
-          years--;
-
-        }
-
-
-        /*
-          Find the date after removing
-          completed years.
-        */
-
-        const yearStart =
-          new Date(weddingDate);
-
-        yearStart.setFullYear(
-          weddingDate.getFullYear() + years
-        );
-
-
-        const remainingAfterYears =
-          now - yearStart;
-
-
-        const days =
-          Math.floor(
-            remainingAfterYears /
-            (1000 * 60 * 60 * 24)
-          );
-
-
-        const hours =
-          Math.floor(
-            (
-              remainingAfterYears %
+          const days =
+            Math.floor(
+              difference /
               (1000 * 60 * 60 * 24)
-            )
-            /
-            (1000 * 60 * 60)
-          );
+            );
 
 
-        const minutes =
-          Math.floor(
-            (
-              remainingAfterYears %
-              (1000 * 60 * 60)
-            )
-            /
-            (1000 * 60)
-          );
+          const hours =
+            Math.floor(
+              (
+                difference /
+                (1000 * 60 * 60)
+              ) % 24
+            );
 
 
-        const seconds =
-          Math.floor(
-            (
-              remainingAfterYears %
-              (1000 * 60)
-            )
-            /
-            1000
-          );
+          const minutes =
+            Math.floor(
+              (
+                difference /
+                (1000 * 60)
+              ) % 60
+            );
 
 
-        /*
-          Update the website text
-        */
-
-        document
-          .getElementById("timerTitle")
-          .innerHTML =
-          "Our Journey Has Begun";
-
-
-        document
-          .getElementById("timerSubtitle")
-          .innerHTML =
-          "AND EVERY MOMENT IS A NEW MEMORY";
+          const seconds =
+            Math.floor(
+              (
+                difference /
+                1000
+              ) % 60
+            );
 
 
-        document
-          .getElementById("journeyMessage")
-          .innerHTML =
-          "Since June 20, 2026, our journey as Caleb & Nimisha has continued to grow — one beautiful moment at a time. ♡";
+          timerTitle.textContent =
+            "Counting Down";
 
 
-        /*
-          Display elapsed time
-        */
-
-        document
-          .getElementById("years")
-          .innerHTML =
-          String(years).padStart(2, "0");
+          timerMessage.textContent =
+            "Every second brings us closer to the beautiful moment when our forever begins.";
 
 
-        document
-          .getElementById("days")
-          .innerHTML =
-          String(days).padStart(2, "0");
+          daysElement.textContent =
+            days;
 
 
-        document
-          .getElementById("hours")
-          .innerHTML =
-          String(hours).padStart(2, "0");
+          hoursElement.textContent =
+            pad(hours);
 
 
-        document
-          .getElementById("minutes")
-          .innerHTML =
-          String(minutes).padStart(2, "0");
+          minutesElement.textContent =
+            pad(minutes);
 
 
-        document
-          .getElementById("seconds")
-          .innerHTML =
-          String(seconds).padStart(2, "0");
+          secondsElement.textContent =
+            pad(seconds);
+
+        }
+
+
+        /* =========================
+           AFTER WEDDING
+        ========================= */
+
+        else {
+
+          const elapsed =
+            now -
+            weddingJourneyDate;
+
+
+          const days =
+            Math.floor(
+              elapsed /
+              (1000 * 60 * 60 * 24)
+            );
+
+
+          const hours =
+            Math.floor(
+              (
+                elapsed /
+                (1000 * 60 * 60)
+              ) % 24
+            );
+
+
+          const minutes =
+            Math.floor(
+              (
+                elapsed /
+                (1000 * 60)
+              ) % 60
+            );
+
+
+          const seconds =
+            Math.floor(
+              (
+                elapsed /
+                1000
+              ) % 60
+            );
+
+
+          timerTitle.textContent =
+            "Our Journey Has Begun ♡";
+
+
+          timerMessage.textContent =
+            "Since June 20, 2026, Caleb & Nimisha have been writing their beautiful story together — one day, one memory and one moment at a time.";
+
+
+          daysElement.textContent =
+            days;
+
+
+          hoursElement.textContent =
+            pad(hours);
+
+
+          minutesElement.textContent =
+            pad(minutes);
+
+
+          secondsElement.textContent =
+            pad(seconds);
+
+        }
 
       }
 
-    }
+
+      updateJourneyTimer();
 
 
-    /*
-      Run immediately
-    */
+      setInterval(
+        updateJourneyTimer,
+        1000
+      );
 
-    updateWeddingTimer();
+
+      /* =========================
+         WELCOME + MUSIC
+      ========================= */
+
+      const welcomeOverlay =
+        document.getElementById(
+          "welcomeOverlay"
+        );
 
 
-    /*
-      Update every second forever
-    */
+      const openInviteBtn =
+        document.getElementById(
+          "openInviteBtn"
+        );
 
-    setInterval(
-      updateWeddingTimer,
-      1000
-    );
+
+      const curtainReveal =
+        document.getElementById(
+          "curtainReveal"
+        );
+
+
+      const weddingAudio =
+        document.getElementById(
+          "weddingAudio"
+        );
+
+
+      const musicToggleBtn =
+        document.getElementById(
+          "musicToggleBtn"
+        );
+
+
+      const musicStatus =
+        document.getElementById(
+          "musicStatus"
+        );
+
+
+      weddingAudio.volume = 0.55;
+
+
+      function updateMusicUI() {
+
+        if (weddingAudio.paused) {
+
+          musicToggleBtn.textContent =
+            "Play Music";
+
+          musicStatus.textContent =
+            "Tap play to enjoy our song";
+
+        }
+
+        else {
+
+          musicToggleBtn.textContent =
+            "Pause Music";
+
+          musicStatus.textContent =
+            "Playing our wedding song ♡";
+
+        }
+
+      }
+
+
+      async function playWeddingMusic() {
+
+        try {
+
+          await weddingAudio.play();
+
+          updateMusicUI();
+
+        }
+
+        catch (error) {
+
+          console.log(
+            "Music playback needs user interaction.",
+            error
+          );
+
+          musicStatus.textContent =
+            "Tap Play Music to start";
+
+        }
+
+      }
+
+
+      openInviteBtn.addEventListener(
+        "click",
+        async function () {
+
+
+          curtainReveal.classList.remove(
+            "active"
+          );
+
+
+          void curtainReveal.offsetWidth;
+
+
+          curtainReveal.classList.add(
+            "active"
+          );
+
+
+          setTimeout(
+            function () {
+
+              welcomeOverlay.classList.add(
+                "hidden"
+              );
+
+            },
+            400
+          );
+
+
+          setTimeout(
+            function () {
+
+              curtainReveal.classList.remove(
+                "active"
+              );
+
+            },
+            2400
+          );
+
+
+          /*
+            Music starts here because
+            this is a user interaction.
+            This works much better on
+            mobile and Chrome browsers.
+          */
+
+          await playWeddingMusic();
+
+        }
+      );
+
+
+      musicToggleBtn.addEventListener(
+        "click",
+        async function () {
+
+          if (
+            weddingAudio.paused
+          ) {
+
+            await playWeddingMusic();
+
+          }
+
+          else {
+
+            weddingAudio.pause();
+
+            updateMusicUI();
+
+          }
+
+        }
+      );
+
+
+      weddingAudio.addEventListener(
+        "play",
+        updateMusicUI
+      );
+
+
+      weddingAudio.addEventListener(
+        "pause",
+        updateMusicUI
+      );
+
+
+      weddingAudio.addEventListener(
+        "error",
+        function () {
+
+          console.error(
+            "Music file could not be loaded."
+          );
+
+          musicStatus.textContent =
+            "Music file not found";
+
+        }
+      );
+
+
+      updateMusicUI();
+
+
+      /* =========================
+         MODALS
+      ========================= */
+
+      const modals = {
+
+        details:
+          document.getElementById(
+            "detailsModal"
+          ),
+
+        schedule:
+          document.getElementById(
+            "scheduleModal"
+          ),
+
+        blessing:
+          document.getElementById(
+            "blessingModal"
+          )
+
+      };
+
+
+      document
+        .querySelectorAll(
+          "[data-open-modal]"
+        )
+        .forEach(
+          function (button) {
+
+            button.addEventListener(
+              "click",
+              function () {
+
+                const modalName =
+                  button.getAttribute(
+                    "data-open-modal"
+                  );
+
+                const modal =
+                  modals[modalName];
+
+                if (modal) {
+
+                  modal.classList.add(
+                    "open"
+                  );
+
+                }
+
+              }
+            );
+
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          "[data-close-modal]"
+        )
+        .forEach(
+          function (button) {
+
+            button.addEventListener(
+              "click",
+              function () {
+
+                const modal =
+                  button.closest(
+                    ".modal"
+                  );
+
+                modal.classList.remove(
+                  "open"
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      document
+        .querySelectorAll(
+          ".modal"
+        )
+        .forEach(
+          function (modal) {
+
+            modal.addEventListener(
+              "click",
+              function (event) {
+
+                if (
+                  event.target === modal
+                ) {
+
+                  modal.classList.remove(
+                    "open"
+                  );
+
+                }
+
+              }
+            );
+
+          }
+        );
+
+
+      document.addEventListener(
+        "keydown",
+        function (event) {
+
+          if (
+            event.key === "Escape"
+          ) {
+
+            document
+              .querySelectorAll(
+                ".modal.open"
+              )
+              .forEach(
+                function (modal) {
+
+                  modal.classList.remove(
+                    "open"
+                  );
+
+                }
+              );
+
+          }
+
+        }
+      );
+
+
+      /* =========================
+         FALLING PETALS
+      ========================= */
+
+      const petalLayer =
+        document.getElementById(
+          "petalLayer"
+        );
+
+
+      if (
+        petalLayer &&
+        !window
+          .matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          )
+          .matches
+      ) {
+
+        const petalCount =
+          window.innerWidth < 760
+            ? 14
+            : 22;
+
+
+        for (
+          let i = 0;
+          i < petalCount;
+          i++
+        ) {
+
+          const petal =
+            document.createElement(
+              "span"
+            );
+
+
+          petal.className =
+            "petal";
+
+
+          petal.style.left =
+            `${Math.random() * 100}vw`;
+
+
+          petal.style.setProperty(
+            "--drift-x",
+            `${(
+              Math.random() * 24 - 12
+            ).toFixed(2)}vw`
+          );
+
+
+          petal.style.animationDuration =
+            `${
+              12 +
+              Math.random() * 10
+            }s, ${
+              2.5 +
+              Math.random() * 2.5
+            }s`;
+
+
+          petal.style.animationDelay =
+            `${
+              Math.random() * -18
+            }s, ${
+              Math.random() * -4
+            }s`;
+
+
+          petal.style.opacity =
+            0.35 +
+            Math.random() * 0.45;
+
+
+          petalLayer.appendChild(
+            petal
+          );
+
+        }
+
+      }
+
+
+      /* =========================
+         SCROLL ANIMATION
+      ========================= */
+
+      const observer =
+        new IntersectionObserver(
+
+          function (entries) {
+
+            entries.forEach(
+              function (entry) {
+
+                if (
+                  entry.isIntersecting
+                ) {
+
+                  entry.target.classList.add(
+                    "visible"
+                  );
+
+                }
+
+              }
+            );
+
+          },
+
+          {
+            threshold: 0.15
+          }
+
+        );
+
+
+      document
+        .querySelectorAll(
+          ".fade-up"
+        )
+        .forEach(
+          function (element) {
+
+            observer.observe(
+              element
+            );
+
+          }
+        );
+
+    })();
 
   </script>
 
